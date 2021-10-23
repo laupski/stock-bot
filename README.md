@@ -1,1 +1,1 @@
-# Stock-Bot
+# Stock-Bot [![CircleCI](https://circleci.com/gh/laupski/stock-bot/tree/main.svg?style=svg)](https://circleci.com/gh/laupski/stock-bot/tree/main)

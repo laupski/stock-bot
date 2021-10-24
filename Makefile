@@ -9,4 +9,4 @@ clean:
 	-docker rmi laupski/stock-bot
 
 run:
-	docker run -d --rm -p 3000:3000 --name stock-bot laupski/stock-bot
+	docker run -d --rm --name stock-bot laupski/stock-bot

@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\"",
     "lint": "eslint ./",
-    "deploy": "node delete-commands.js && node deploy-commands.js"
+    "deploy": "node delete-commands.js && node create-commands.js"
   },
   "repository": {
     "type": "git",

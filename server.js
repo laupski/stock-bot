@@ -1,5 +1,6 @@
 /* eslint-disable global-require */
 /* eslint-disable import/no-dynamic-require */
+/* eslint-disable import/no-unresolved */
 const fs = require('fs');
 const { Client, Collection, Intents } = require('discord.js');
 const config = require('./config/config.json');

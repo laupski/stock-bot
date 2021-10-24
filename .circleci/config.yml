@@ -22,7 +22,10 @@ jobs:
       - run: npm install
       - run: npm run test
 
-jobs:
-- install
-- lint
-- test
+workflows:
+  build: # This is the name of the workflow, feel free to change it to better match your workflow.
+    # Inside the workflow, you define the jobs you want to run.
+    jobs:
+      - install
+      - lint
+      - test

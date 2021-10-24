@@ -15,4 +15,7 @@ RUN npm install
 # Bundle app source
 COPY . .
 
-CMD [ "node", "server.js" ]
+# Keys to be injected
+ENV BOT_TOKEN="" GUILDID="" CLIENTID="" ALPHAKEY=""
+
+ENTRYPOINT [ "node", "server.js" ]

@@ -235,6 +235,7 @@ dist
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/node,jetbrains+all,visualstudiocode
-config/config.json
+config/
 config.json
 *.env
+config.sh

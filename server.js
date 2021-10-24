@@ -1,9 +1,29 @@
 /* eslint-disable global-require */
 /* eslint-disable import/no-dynamic-require */
-/* eslint-disable import/no-unresolved */
 const fs = require('fs');
 const { Client, Collection, Intents } = require('discord.js');
-const config = require('./config/config.json');
+
+const clientId = process.env.CLIENTID;
+const guildId = process.env.GUILDID;
+const token = process.env.BOT_TOKEN;
+const alphakey = process.env.ALPHAKEY;
+
+if (clientId === '' || typeof clientId === 'undefined') {
+  console.error('Client ID not set, exiting');
+  process.exit(1);
+}
+if (guildId === '' || typeof guildId === 'undefined') {
+  console.error('Guild ID not set, exiting');
+  process.exit(1);
+}
+if (token === '' || typeof token === 'undefined') {
+  console.error('Bot token not set, exiting');
+  process.exit(1);
+}
+if (alphakey === '' || typeof alphakey === 'undefined') {
+  console.error('Alpha Vantage API key not set, exiting');
+  process.exit(1);
+}
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 client.commands = new Collection();
@@ -35,4 +55,4 @@ client.on('interactionCreate', async (interaction) => {
   }
 });
 
-client.login(config.token);
+client.login(token);

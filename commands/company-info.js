@@ -1,8 +1,5 @@
-/* eslint-disable import/no-unresolved */
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const config = require('../config/config.json');
-// eslint-disable-next-line import/order
-const alpha = require('alphavantage')({ key: config.alphavantage });
+const alpha = require('alphavantage')({ key: process.env.ALPHAKEY });
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -12,10 +9,7 @@ module.exports = {
   async execute(interaction) {
     const ticker = interaction.options.getString('ticker');
     if (ticker) {
-      alpha.fundamental.company_overview(ticker).then((data) => {
-        console.log(data);
-        return interaction.reply(`Company overview of \`${ticker}\`: ${data.Name} -- ${data.AssetType} \n${data.Description}`);
-      }).catch((error) => {
+      alpha.fundamental.company_overview(ticker).then((data) => interaction.reply(`Company overview of \`${ticker}\`: ${data.Name} -- ${data.AssetType} \n${data.Description}`)).catch((error) => {
         console.error(error);
         return interaction.reply('Error has occurred');
       });

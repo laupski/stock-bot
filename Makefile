@@ -10,4 +10,4 @@ clean:
 
 run:
 	npm run deploy
-	docker run -d --rm --name stock-bot laupski/stock-bot
+	docker run -d --rm --name stock-bot --env CLIENTID=${CLIENTID} --env GUILDID=${GUILDID} --env BOT_TOKEN=${BOT_TOKEN} --env ALPHAKEY=${ALPHAKEY} laupski/stock-bot

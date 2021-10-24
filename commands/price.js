@@ -1,8 +1,5 @@
-/* eslint-disable import/no-unresolved */
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const config = require('../config/config.json');
-// eslint-disable-next-line import/order
-const alpha = require('alphavantage')({ key: config.alphavantage });
+const alpha = require('alphavantage')({ key: process.env.ALPHAKEY });
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -15,7 +12,9 @@ module.exports = {
       alpha.data.quote(ticker).then((data) => {
         console.log(data);
         const price = data['Global Quote']['05. price'];
-        return interaction.reply(`Current price of \`${ticker}\`: ${price}`);
+        const percent = data['Global Quote']['10. change percent'];
+        const previousclose = data['Global Quote']['08. previous close'];
+        return interaction.reply(`Current price of \`${ticker}\`: ${price} (${percent}) Previous close: ${previousclose}`);
       }).catch((error) => {
         console.error(error);
         return interaction.reply('Error has occurred');

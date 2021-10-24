@@ -239,3 +239,4 @@ config/
 config.json
 *.env
 config.sh
+sample-config.sh

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const config = require('../config/config.json');
 // eslint-disable-next-line import/order

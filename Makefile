@@ -9,4 +9,5 @@ clean:
 	-docker rmi laupski/stock-bot
 
 run:
+	npm run deploy
 	docker run -d --rm --name stock-bot laupski/stock-bot

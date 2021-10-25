@@ -23,10 +23,10 @@ resource "heroku_app" "stock-bot-laupski" {
 resource "heroku_build" "stock-bot-build" {
   app        = heroku_app.stock-bot-laupski.id
   source {
-    url     = "https://github.com/laupski/stock-bot/archive/refs/tags/v0.1.0.tar.gz"
-    version = "v0.1.0"
+    url     = "https://github.com/laupski/stock-bot/archive/refs/tags/v0.1.1.tar.gz"
+    version = "v0.1.1"
   }
-  
+
   lifecycle {
     create_before_destroy = true  
   }

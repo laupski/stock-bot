@@ -1,7 +1,7 @@
 version: 2
 
 jobs:
-  install:
+  build:
     docker:
       - image: circleci/node:16.11.1
     steps:
@@ -26,6 +26,10 @@ workflows:
   version: 2
   pr-checks: 
     jobs:
-      - install
-      - lint
-      - test
+      - build
+      - lint:
+          requires:
+            - build
+      - test:
+          requires:
+            - lint

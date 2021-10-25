@@ -1,6 +1,12 @@
 version: 2.1
 
 jobs:
+  install:
+    docker:
+      - image: circleci/node:16.11.1
+    steps:
+      - checkout
+      - run: npm install
   lint:
     docker:
       - image: circleci/node:16.11.1
@@ -8,12 +14,8 @@ jobs:
       - checkout
       - run: npm install eslint
       - run: npm run lint
-  install:
-    docker:
-      - image: circleci/node:16.11.1
-    steps:
-      - checkout
-      - run: npm install
+    requires:
+      - install
   test:
     docker:
       - image: circleci/node:16.11.1
@@ -21,6 +23,9 @@ jobs:
       - checkout
       - run: npm install
       - run: npm run test
+    requires:
+      - install
+      - test
 
 workflows:
   build: # This is the name of the workflow, feel free to change it to better match your workflow.

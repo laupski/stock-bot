@@ -21,8 +21,7 @@ resource "heroku_app" "stock-bot-laupski" {
 resource "heroku_build" "stock-bot-build" {
   app        = heroku_app.stock-bot-laupski.id
   source {
-    url     = "https://github.com/laupski/stock-bot/archive/refs/tags/v0.1.1.tar.gz"
-    version = "v0.1.1"
+    url     = "https://github.com/laupski/stock-bot/archive/refs/heads/main.tar.gz"
   }
 
   lifecycle {
@@ -39,7 +38,7 @@ resource "heroku_formation" "stock-bot-formation" {
   app        = heroku_app.stock-bot-laupski.id
   type       = "web"  
   quantity   = var.app_quantity  
-  size       = "Free"  
+  size       = "Hobby"  
   depends_on = [heroku_build.stock-bot-build]
 }
 

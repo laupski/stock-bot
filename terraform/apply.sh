@@ -1,11 +1,5 @@
 #!/bin/bash
-# Replace values here for running!
-# After set run: source ./sample-config.sh
-
-BOT_TOKEN="";
-GUILDID="";
-CLIENTID="";
-ALPHAKEY="";
+# Used to pass in variables to terraform then into heroku
 
 if [[ -z "${BOT_TOKEN}" ]]; then 
     echo "BOT_TOKEN not set, please set.";
@@ -24,9 +18,8 @@ if [[ -z "${ALPHAKEY}" ]]; then
     exit 2
 fi
 
-export BOT_TOKEN="${BOT_TOKEN}";
-export GUILDID="${GUILDID}";
-export CLIENTID="${CLIENTID}";
-export ALPHAKEY="${ALPHAKEY}";
-
-#mv sample-config.sh config.sh;
+terraform apply \
+-var="BOT_TOKEN=${BOT_TOKEN}" \
+-var="GUILDID=${GUILDID}" \
+-var="CLIENTID=${CLIENTID}" \
+-var="ALPHAKEY=${ALPHAKEY}" 

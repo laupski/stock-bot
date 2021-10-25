@@ -13,11 +13,9 @@ resource "heroku_app" "stock-bot-laupski" {
   sensitive_config_vars = {
     CLIENTID = var.CLIENTID
     GUILDID = var.GUILDID
-    BOTTOKEN = var.BOT_TOKEN
+    BOT_TOKEN = var.BOT_TOKEN
     ALPHAKEY = var.ALPHAKEY
   }
-
-
 }
 
 resource "heroku_build" "stock-bot-build" {

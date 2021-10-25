@@ -27,10 +27,10 @@ workflows:
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - install
-      - lint
+      - lint:
         requires:
           - install
-      - test
+      - test:
         requires:
           - install
           - lint

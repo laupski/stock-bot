@@ -16,6 +16,8 @@ resource "heroku_app" "stock-bot-laupski" {
     BOTTOKEN = var.BOT_TOKEN
     ALPHAKEY = var.ALPHAKEY
   }
+
+
 }
 
 resource "heroku_build" "stock-bot-build" {
@@ -23,6 +25,10 @@ resource "heroku_build" "stock-bot-build" {
   source {
     url     = "https://github.com/laupski/stock-bot/archive/refs/tags/v0.1.0.tar.gz"
     version = "v0.1.0"
+  }
+  
+  lifecycle {
+    create_before_destroy = true  
   }
 }
 

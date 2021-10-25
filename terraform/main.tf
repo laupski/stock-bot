@@ -42,11 +42,6 @@ resource "heroku_formation" "stock-bot-formation" {
   depends_on = [heroku_build.stock-bot-build]
 }
 
-output "app_url" {  
-  value       = heroku_app.stock-bot-laupski.web_url  
-  description = "Application URL"
-}
-
 variable "CLIENTID" {
     description = "Client ID of the stock-bot"
 }

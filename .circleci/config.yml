@@ -28,4 +28,4 @@ workflows:
     jobs:
       - install
       - lint
-      - test:
+      - test

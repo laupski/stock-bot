@@ -2,11 +2,12 @@
   "name": "stock-bot",
   "version": "0.1.0",
   "description": "PoC discord bot",
-  "main": "server.js",
+  "main": "src/cmd/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\"",
-    "lint": "eslint ./",
-    "deploy": "node delete-commands.js && node create-commands.js"
+    "compile": "tsc",
+    "deploy": "npm run compile && node ./build/cmd/delete-commands.js && node ./build/cmd/create-commands.js",
+    "server": "npm run compile && node ./build/cmd/server.js",
+    "lint": "eslint ./"
   },
   "repository": {
     "type": "git",
@@ -33,7 +34,8 @@
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.26.1",
-    "eslint-plugin-react-hooks": "^1.7.0"
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "typescript": "^4.4.4"
   },
   "engines": {
     "node": "16.x"

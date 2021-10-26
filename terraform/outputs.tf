@@ -1,3 +1,3 @@
 output "droplet_ipv4" {
-    value = "ssh root@${digitalocean_droplet.stock-bot.ipv4_address}"
+    value = "ssh stock-bot@${digitalocean_droplet.stock-bot.ipv4_address}"
 }

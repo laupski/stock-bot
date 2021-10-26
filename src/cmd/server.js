@@ -1,11 +1,7 @@
 /* eslint-disable global-require */
 /* eslint-disable import/no-dynamic-require */
 const fs = require('fs');
-const {
-  Client,
-  Collection,
-  Intents,
-} = require('discord.js');
+const { Client, Collection, Intents } = require('discord.js');
 
 const clientId = process.env.CLIENTID;
 const guildId = process.env.GUILDID;
@@ -31,8 +27,7 @@ if (alphakey === '' || typeof alphakey === 'undefined') {
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 client.commands = new Collection();
-const commandFiles = fs.readdirSync(`${__dirname}/../commands`)
-  .filter((file) => file.endsWith('.js'));
+const commandFiles = fs.readdirSync(`${__dirname}/../commands`).filter((file) => file.endsWith('.js'));
 
 console.log(`commandFiles is ${commandFiles}`);
 

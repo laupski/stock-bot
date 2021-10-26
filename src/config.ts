@@ -7,34 +7,38 @@ export interface Config {
 
 export class EnvironmentConfig implements Config {
   public get clientId(): string {
-    if (process.env.CLIENTID === '') {
+    const clientId = process.env.CLIENTID ?? '';
+    if (clientId === '') {
       console.error('Client ID not set, exiting');
       process.exit(1);
     }
-    return process.env.CLIENTID;
+    return clientId;
   }
 
   public get alphaKey(): string {
-    if (process.env.ALPHAKEY === '') {
+    const alphaKey = process.env.ALPHAKEY ?? '';
+    if (alphaKey === '') {
       console.error('Alpha Vantage API key not set, exiting');
       process.exit(1);
     }
-    return process.env.ALPHAKEY;
+    return alphaKey;
   }
 
   public get botToken(): string {
-    if (process.env.BOT_TOKEN === '') {
+    const botToken = process.env.BOT_TOKEN ?? '';
+    if (botToken === '') {
       console.error('Bot token not set, exiting');
       process.exit(1);
     }
-    return process.env.BOT_TOKEN;
+    return botToken;
   }
 
   public get guildId(): string {
-    if (process.env.GUILDID === '') {
+    const guildId = process.env.GUILDID ?? '';
+    if (guildId === '') {
       console.error('Guild ID not set, exiting');
       process.exit(1);
     }
-    return process.env.GUILDID;
+    return guildId;
   }
 }

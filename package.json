@@ -4,6 +4,7 @@
   "description": "PoC discord bot",
   "scripts": {
     "compile": "tsc",
+    "test": "echo \"Testing not implemented yet\"",
     "deploy": "npm run compile && node ./build/cmd/delete-commands.js && node ./build/cmd/create-commands.js",
     "server": "npm run compile && node ./build/cmd/server.js",
     "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx",

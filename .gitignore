@@ -281,3 +281,4 @@ config.json
 *.env
 config.sh
 sample-config.sh
+nightly-config.sh

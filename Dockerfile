@@ -18,4 +18,4 @@ COPY . .
 # Keys to be injected
 ENV BOT_TOKEN="" GUILDID="" CLIENTID="" ALPHAKEY=""
 
-ENTRYPOINT [ "node", "server.js" ]
+ENTRYPOINT [ "node", "build/cmd/server.js" ]

@@ -8,6 +8,7 @@ async function main(config: Config) {
   const commandFiles = fs.readdirSync(`${__dirname}/../commands`).filter((file) => file.endsWith('.js'));
 
   for (const file of commandFiles) {
+    // eslint-disable-next-line import/no-dynamic-require,global-require
     const command = require(`${__dirname}/../commands/${file}`);
     commands.push(command.data.toJSON());
   }

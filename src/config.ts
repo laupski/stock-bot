@@ -6,6 +6,7 @@ export interface Config {
 }
 
 export class EnvironmentConfig implements Config {
+  // eslint-disable-next-line class-methods-use-this
   public get clientId(): string {
     const clientId = process.env.CLIENTID ?? '';
     if (clientId === '') {
@@ -15,6 +16,7 @@ export class EnvironmentConfig implements Config {
     return clientId;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   public get alphaKey(): string {
     const alphaKey = process.env.ALPHAKEY ?? '';
     if (alphaKey === '') {
@@ -24,6 +26,7 @@ export class EnvironmentConfig implements Config {
     return alphaKey;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   public get botToken(): string {
     const botToken = process.env.BOT_TOKEN ?? '';
     if (botToken === '') {
@@ -33,6 +36,7 @@ export class EnvironmentConfig implements Config {
     return botToken;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   public get guildId(): string {
     const guildId = process.env.GUILDID ?? '';
     if (guildId === '') {

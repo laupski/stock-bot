@@ -9,6 +9,7 @@ async function main(config: Config) {
   const commandFiles = fs.readdirSync(`${__dirname}/../commands`).filter((file) => file.endsWith('.js'));
 
   for (const file of commandFiles) {
+    // eslint-disable-next-line global-require,import/no-dynamic-require
     const command = require(`${__dirname}/../commands/${file}`);
     // Set a new item in the Collection
     // With the key as the command name and the value as the exported module

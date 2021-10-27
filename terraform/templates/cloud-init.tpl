@@ -27,17 +27,16 @@ write_files:
    path: /etc/profile.d/motd.sh
    permissions: '0755'
  - encoding: b64
-   content: ${userdata_env}
-   path: /tmp/env.sh
-   permissions: '0755'
+   content: ${userdata_pm2}
+   path: /tmp/processes.yml
 
 runcmd:
  - apt-get update --fix-missing
  - curl -sL https://deb.nodesource.com/setup_16.x | bash && apt-get install -y nodejs
  - npm install pm2 -g
  - cd /home/stock-bot && sudo -u stock-bot git clone ${userdata_giturl}
- - mv /tmp/env.sh /home/stock-bot/stock-bot/env.sh
+ - mv /tmp/processes.yml /home/stock-bot/stock-bot/processes.yml
  - cd /home/stock-bot/stock-bot && sudo -u stock-bot npm install
- - chown stock-bot.stock-bot /home/stock-bot/stock-bot/env.sh && /home/stock-bot/stock-bot/env.sh
- - sudo -u stock-bot pm2 server.js
+ - cd /home/stock-bot/stock-bot && sudo -u stock-bot npm deploy
+ - cd /home/stock-bot/stock-bot && sudo -u stock-bot pm2 start processes.yml
  

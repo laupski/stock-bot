@@ -7,8 +7,8 @@ terraform {
   }
 }
 
-resource "template_file" "env" {
-  template = "${file("${path.module}/templates/env.tpl")}"
+resource "template_file" "pm2" {
+  template = "${file("${path.module}/templates/pm2.tpl")}"
 
   vars = {
     CLIENTID = "${var.CLIENTID}"
@@ -23,7 +23,7 @@ resource "template_file" "cloud-init" {
 
   vars = {
     userdata_sshkey = "${var.sshkey}"
-    userdata_env = "${base64encode("${template_file.env.rendered}")}"
+    userdata_pm2 = "${base64encode("${template_file.pm2.rendered}")}"
     userdata_motd = "${base64encode(file("${path.module}/files/motd"))}"
     userdata_motd_script = "${base64encode(file("${path.module}/files/motd.sh"))}"
     userdata_giturl = "${var.git_url}"

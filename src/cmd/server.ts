@@ -32,10 +32,10 @@ async function deleteCommands(config: Config, guildId) {
   try {
     // Delete all current commands
     const commands = (await rest.get(
-        Routes.applicationGuildCommands(config.clientId, guildId)
+      Routes.applicationGuildCommands(config.clientId, guildId)
     )) as RESTGetAPIApplicationGuildCommandsResult;
     const deletePromises = commands.map((command) =>
-        rest.delete(Routes.applicationGuildCommand(config.clientId, guildId, command.id))
+      rest.delete(Routes.applicationGuildCommand(config.clientId, guildId, command.id))
     );
     await Promise.all(deletePromises);
     console.log(`Successfully deleted commands at guild ${guildId}`);
@@ -57,17 +57,25 @@ async function main(config: Config) {
     commands.set(command.data.name, command);
   }
 
-  client.once('ready', () => {
-    client.guilds.valueOf().forEach( guild => {
-      try {
-        deleteCommands(config, guild.id);
-        createCommands(config, guild.id);
-      } catch (error) {
-        console.error(`Could not deploy commands to ${guild.id}! -- ${guild.name}`);
-      }
-    });
+  client.once('ready', async () => {
+    await Promise.all(
+      client.guilds.valueOf().map(async (guild) => {
+        try {
+          await deleteCommands(config, guild.id);
+          await createCommands(config, guild.id);
+        } catch (error) {
+          console.error(`Could not deploy commands to ${guild.id} -- ${guild.name}`);
+        }
+      })
+    );
 
+    console.log(`Logged in as ${client.user!.username}`);
     console.log('Ready!');
+  });
+
+  client.on('guildCreate', async (guild) => {
+    // Do not need to delete on invite, no guild commands should exist
+    await createCommands(config, guild.id);
   });
 
   client.on('interactionCreate', async (interaction) => {

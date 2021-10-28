@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import {Client, Collection, Intents} from 'discord.js';
+import { Client, Collection, Intents } from 'discord.js';
 import { REST } from '@discordjs/rest';
 import { RESTGetAPIApplicationGuildCommandsResult, Routes } from 'discord-api-types/v9';
 import { Config, EnvironmentConfig } from '../config';

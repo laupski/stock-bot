@@ -2,11 +2,12 @@
   "name": "stock-bot",
   "version": "0.1.0",
   "description": "PoC discord bot",
-  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\"",
-    "lint": "eslint ./",
-    "deploy": "node delete-commands.js && node create-commands.js"
+    "compile": "tsc",
+    "start": "npm run compile && node ./build/cmd/server.js",
+    "test": "echo \"Testing not implemented yet\"",
+    "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
+    "format": "prettier --write src/"
   },
   "repository": {
     "type": "git",
@@ -27,13 +28,17 @@
     "discord.js": "^13.2.0"
   },
   "devDependencies": {
+    "@types/node": "^16.11.6",
+    "@typescript-eslint/eslint-plugin": "^4.33.0",
+    "@typescript-eslint/parser": "^4.33.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-airbnb-typescript": "^14.0.1",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.2",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-react": "^7.26.1",
-    "eslint-plugin-react-hooks": "^1.7.0"
+    "prettier": "2.4.1",
+    "typescript": "^4.4.4"
   },
   "engines": {
     "node": "16.x"

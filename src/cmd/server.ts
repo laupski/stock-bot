@@ -42,6 +42,11 @@ async function deleteCommands(config: Config) {
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function foo() {}
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function bar() {}
+
 async function main(config: Config) {
   try {
     await deleteCommands(config);

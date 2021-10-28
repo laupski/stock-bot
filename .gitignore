@@ -277,8 +277,5 @@ terraform.rc
 
 # End of https://www.toptal.com/developers/gitignore/api/terraform
 
-config/
-config.json
 *.env
-config.sh
-sample-config.sh
+config*

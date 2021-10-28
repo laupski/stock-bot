@@ -25,7 +25,7 @@ jobs:
     machine: true
     steps:
       - checkout
-      - run: make
+      - run: make build
 
 workflows:
   version: 2

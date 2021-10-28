@@ -77,7 +77,7 @@ async function main(config: Config) {
     if (typeof command === 'undefined') return;
 
     try {
-      await command.execute(interaction);
+      await command.execute(interaction, config);
     } catch (error) {
       console.error(`Failed to execute ${command} with interaction ${interaction}: ${error}`);
       await interaction.reply({

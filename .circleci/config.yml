@@ -21,10 +21,15 @@ jobs:
       - checkout
       - run: npm install
       - run: npm run test
+  docker-build:
+    machine: true
+    steps:
+      - checkout
+      - run: make build
 
 workflows:
   version: 2
-  pr-checks: 
+  pr-checks:
     jobs:
       - build
       - lint:
@@ -33,3 +38,6 @@ workflows:
       - test:
           requires:
             - lint
+      - docker-build:
+          requires:
+            - test

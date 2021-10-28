@@ -37,6 +37,5 @@ runcmd:
  - cd /home/stock-bot && sudo -u stock-bot git clone ${userdata_giturl}
  - mv /tmp/processes.yml /home/stock-bot/stock-bot/processes.yml
  - cd /home/stock-bot/stock-bot && sudo -u stock-bot npm install
- - cd /home/stock-bot/stock-bot && sudo -u stock-bot npm deploy
+ - cd /home/stock-bot/stock-bot && sudo -u stock-bot npm run compile
  - cd /home/stock-bot/stock-bot && sudo -u stock-bot pm2 start processes.yml
- 

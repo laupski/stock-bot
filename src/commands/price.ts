@@ -1,12 +1,22 @@
+import Alpha from 'alphavantage';
+import { Config } from '../config';
+
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const alpha = require('alphavantage')({ key: process.env.ALPHAKEY });
 
 export = {
+  _alpha: undefined,
+
   data: new SlashCommandBuilder()
     .setName('price')
     .setDescription('Get price of a ticker')
     .addStringOption((option) => option.setName('ticker').setDescription('The ticker to get a quote')),
-  async execute(interaction) {
+
+  async execute(interaction, config: Config) {
+    if (typeof this.alpha === 'undefined') {
+      this.alpha = Alpha({ key: config.alphaKey });
+    }
+    const { alpha } = this;
+
     const ticker = interaction.options.getString('ticker');
     if (ticker) {
       alpha.data

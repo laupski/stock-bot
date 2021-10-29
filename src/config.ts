@@ -1,6 +1,5 @@
 export interface Config {
   readonly clientId: string;
-  readonly guildId: string;
   readonly botToken: string;
   readonly alphaKey: string;
 }
@@ -34,15 +33,5 @@ export class EnvironmentConfig implements Config {
       process.exit(1);
     }
     return botToken;
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  public get guildId(): string {
-    const guildId = process.env.GUILDID ?? '';
-    if (guildId === '') {
-      console.error('Guild ID not set, exiting');
-      process.exit(1);
-    }
-    return guildId;
   }
 }

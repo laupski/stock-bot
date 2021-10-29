@@ -5,7 +5,7 @@ import { RESTGetAPIApplicationGuildCommandsResult, Routes } from 'discord-api-ty
 import { Config, EnvironmentConfig } from '../config';
 import { StockBotSlashCommand } from '../model';
 
-async function createCommands(config: Config) {
+async function createCommands(config: Config, guildId) {
   const commands: string[] = [];
   const commandFiles = fs.readdirSync(`${__dirname}/../commands`).filter((file) => file.endsWith('.js'));
 
@@ -18,39 +18,33 @@ async function createCommands(config: Config) {
   const rest = new REST({ version: '9' }).setToken(config.botToken);
 
   rest
-    .put(Routes.applicationGuildCommands(config.clientId, config.guildId), {
+    .put(Routes.applicationGuildCommands(config.clientId, guildId), {
       body: commands,
     })
-    .then(() => console.log('Successfully registered application commands.'))
+    .then(() => console.log(`Successfully registered guild commands at ${guildId}`))
     .catch(console.error);
 }
 
-async function deleteCommands(config: Config) {
+async function deleteCommands(config: Config, guildId) {
   const rest = new REST({ version: '9' }).setToken(config.botToken);
+  console.log(`Deploying commands to: ${guildId}`);
 
   try {
+    // Delete all current commands
     const commands = (await rest.get(
-      Routes.applicationGuildCommands(config.clientId, config.guildId)
+      Routes.applicationGuildCommands(config.clientId, guildId)
     )) as RESTGetAPIApplicationGuildCommandsResult;
     const deletePromises = commands.map((command) =>
-      rest.delete(Routes.applicationGuildCommand(config.clientId, config.guildId, command.id))
+      rest.delete(Routes.applicationGuildCommand(config.clientId, guildId, command.id))
     );
     await Promise.all(deletePromises);
-    console.log('Successfully deleted commands');
+    console.log(`Successfully deleted commands at guild ${guildId}`);
   } catch (error) {
     throw new Error(`Failure deleting commands: ${error}`);
   }
 }
 
 async function main(config: Config) {
-  try {
-    await deleteCommands(config);
-    await createCommands(config);
-  } catch (error) {
-    console.error(`Failed to recreate slash commands: ${error}`);
-    process.exit(1);
-  }
-
   const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
   const commands = new Collection<string, StockBotSlashCommand>();
   const commandFiles = fs.readdirSync(`${__dirname}/../commands`).filter((file) => file.endsWith('.js'));
@@ -63,8 +57,25 @@ async function main(config: Config) {
     commands.set(command.data.name, command);
   }
 
-  client.once('ready', () => {
+  client.once('ready', async () => {
+    await Promise.all(
+      client.guilds.valueOf().map(async (guild) => {
+        try {
+          await deleteCommands(config, guild.id);
+          await createCommands(config, guild.id);
+        } catch (error) {
+          console.error(`Could not deploy commands to ${guild.id} -- ${guild.name}`);
+        }
+      })
+    );
+
+    console.log(`Logged in as ${client.user!.username}`);
     console.log('Ready!');
+  });
+
+  client.on('guildCreate', async (guild) => {
+    // Do not need to delete on invite, no guild commands should exist
+    await createCommands(config, guild.id);
   });
 
   client.on('interactionCreate', async (interaction) => {

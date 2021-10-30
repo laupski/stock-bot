@@ -19,7 +19,7 @@ jobs:
       - image: circleci/node:16.11.1
     steps:
       - checkout
-      - run: npm intall
+      - run: npm install
       - run: npx prettier --check ./src
   test:
     docker:

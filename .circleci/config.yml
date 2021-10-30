@@ -42,9 +42,12 @@ workflows:
       - lint:
           requires:
             - build
+      - prettier:
+          requires:
+            - -lint
       - test:
           requires:
-            - lint
+            - prettier
       - docker-build:
           requires:
             - test

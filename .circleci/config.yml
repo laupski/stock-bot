@@ -12,8 +12,8 @@ jobs:
       - image: circleci/node:16.11.1
     steps:
       - checkout
-      - run: npm install eslint
-      - run: npm run lint
+      - run: npm install --save-dev --save-exact prettier
+      - run: npx prettier --check ./src
   test:
     docker:
       - image: circleci/node:16.11.1

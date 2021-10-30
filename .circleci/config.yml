@@ -12,8 +12,15 @@ jobs:
       - image: circleci/node:16.11.1
     steps:
       - checkout
-      - run: npm install eslint
+      - run: npm install
       - run: npm run lint
+  prettier:
+    docker:
+      - image: circleci/node:16.11.1
+    steps:
+      - checkout
+      - run: npm install
+      - run: npx prettier --check ./src
   test:
     docker:
       - image: circleci/node:16.11.1
@@ -35,9 +42,12 @@ workflows:
       - lint:
           requires:
             - build
-      - test:
+      - prettier:
           requires:
             - lint
+      - test:
+          requires:
+            - prettier
       - docker-build:
           requires:
             - test

@@ -2,6 +2,7 @@ export interface Config {
   readonly clientId: string;
   readonly botToken: string;
   readonly alphaKey: string;
+  readonly fmpKey: string;
 }
 
 export class EnvironmentConfig implements Config {
@@ -33,5 +34,15 @@ export class EnvironmentConfig implements Config {
       process.exit(1);
     }
     return botToken;
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  public get fmpKey(): string {
+    const fmpKey = process.env.FMP_KEY ?? '';
+    if (fmpKey === '') {
+      console.error('Financial Modeling Prep API key not set, exiting');
+      process.exit(1);
+    }
+    return fmpKey;
   }
 }
